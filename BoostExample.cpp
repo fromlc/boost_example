@@ -14,8 +14,8 @@
 //------------------------------------------------------------------------------
 // using symbols
 //------------------------------------------------------------------------------
-using boost::lexical_cast;
-using boost::bad_lexical_cast;
+using boost::lexical_cast;          // does type conversion
+using boost::bad_lexical_cast;      // exception thrown on failed conversion
 
 //------------------------------------------------------------------------------
 // local function prototypes
