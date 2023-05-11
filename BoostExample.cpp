@@ -9,6 +9,7 @@ int main()
     std::cout << "boost demo: lexical_cast\n\n";
 
     int is = lexical_cast<int>("1234");
+    std::cout << "int value of string: " << is << std::endl;
 
     return 0;
 }
