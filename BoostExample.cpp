@@ -4,7 +4,7 @@
 // demos boost library:
 // https://www.boost.org/doc/libs/1_82_0/more/getting_started/windows.html
 //------------------------------------------------------------------------------
-#include <boost/lambda/lambda.hpp>
+//#include <boost/lambda/lambda.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include <algorithm>
@@ -15,14 +15,14 @@
 //------------------------------------------------------------------------------
 // using symbols
 //------------------------------------------------------------------------------
-using namespace boost::lambda;
+//using namespace boost::lambda;
 using boost::lexical_cast;
 using boost::bad_lexical_cast;
 
 //------------------------------------------------------------------------------
 // local function prototypes
 //------------------------------------------------------------------------------
-void lexCast(const std::string&);
+void processInput(const std::string&);
 
 //------------------------------------------------------------------------------
 // entry point
@@ -35,15 +35,24 @@ int main() {
     typedef std::istream_iterator<std::string> in;
 
     std::for_each(
-        in(std::cin), in(), lexCast);
+        in(std::cin), in(), processInput);
 
     return 0;
 }
 
 //------------------------------------------------------------------------------
-// test std::for_each() function pointer param
+// - target for std::for_each() function pointer param
+// - throws bad_lexical_cast exception
 //------------------------------------------------------------------------------
-void lexCast(const std::string& x) {
-    int is = lexical_cast<int>(x);
-    std::cout << "cast string " << x << " to int " << is << "\n\n";
+void processInput(const std::string& x) {
+
+    try {
+        int is = lexical_cast<int>(x);
+        std::cout << "cast string " << x 
+            << " to int " << is << "\n\n";
+    }
+    catch (bad_lexical_cast) {
+        std::cout << "can't validate input: " << x << "\n\n";
+        throw;  // pass this exception to next catch block
+    }
 }
